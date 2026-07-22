@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#147D83" />
+    <meta name="description" content="2026년 여름, 아이 둘과 강아지와 함께 떠나는 속초·고성·양양 가족여행 지도" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>우리의 속초 여름</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="우리의 속초 여름 처음으로 이동">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span>우리의 속초 여름</span>
+      </a>
+      <div class="trip-meta">
+        <span class="meta-pill">2026.07.29 — 08.04</span>
+        <span class="meta-copy">어른 2 · 아이 2 · 강아지 1</span>
+      </div>
+    </header>
+
+    <main id="top" class="app-shell">
+      <section class="trip-intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">SOKCHO · GOSEONG · YANGYANG</p>
+          <h1 id="page-title">바다와 시장 사이,<br /><em>우리의 여름</em>을 고르는 중</h1>
+          <p class="intro-copy">아이들 낮잠과 강아지 산책까지 생각해 둔 가족용 지도예요. 장소를 누르면 이동·비용·이용 팁을 바로 확인할 수 있어요.</p>
+        </div>
+        <div class="stay-card">
+          <span class="stay-label">OUR BASE</span>
+          <strong>청초호반로 267 · 12층</strong>
+          <span>속초에서 고성·양양으로 움직이는 중심점</span>
+        </div>
+      </section>
+
+      <section class="season-strip" aria-label="여행 기간 중 참고할 행사">
+        <div class="season-heading">
+          <span class="sun-dot" aria-hidden="true"></span>
+          <div><span class="eyebrow">SEASONAL NOTE</span><strong>여행 중 열리는 여름 일정</strong></div>
+        </div>
+        <div id="event-list" class="event-list"></div>
+      </section>
+
+      <section class="workspace" aria-label="여행지 지도와 목록">
+        <aside class="place-sidebar">
+          <div class="sidebar-head">
+            <div>
+              <p class="eyebrow">MAP INDEX</p>
+              <h2>가볼 만한 곳 <span id="place-count">0</span></h2>
+            </div>
+            <button id="reset-view" class="text-button" type="button">전체 보기</button>
+          </div>
+          <div class="filter-row" role="group" aria-label="장소 종류 필터">
+            <button class="filter-button is-active" type="button" data-category="all">전체</button>
+            <button class="filter-button" type="button" data-category="beach">해수욕장</button>
+            <button class="filter-button" type="button" data-category="attraction">관광지</button>
+            <button class="filter-button" type="button" data-category="market">시장</button>
+            <button class="filter-button" type="button" data-category="food">식당</button>
+            <button class="filter-button" type="button" data-category="cafe">카페</button>
+          </div>
+          <label class="search-box">
+            <span class="sr-only">장소 검색</span>
+            <span aria-hidden="true">⌕</span>
+            <input id="place-search" type="search" placeholder="장소, 지역, 키워드 검색" autocomplete="off" />
+          </label>
+          <div class="toggle-row">
+            <label class="toggle-control"><input id="family-toggle" type="checkbox" /><span class="toggle-track"></span><span>아이와 편한 곳</span></label>
+            <label class="toggle-control"><input id="pet-toggle" type="checkbox" /><span class="toggle-track"></span><span>강아지 동반</span></label>
+          </div>
+          <div id="place-list" class="place-list" aria-live="polite"></div>
+        </aside>
+
+        <div class="map-column">
+          <div class="map-toolbar">
+            <span><span class="legend-dot sea"></span>속초 중심 · 차로 움직이는 가족 코스</span>
+            <button id="locate-stay" class="map-action" type="button">숙소 중심</button>
+          </div>
+          <div id="map" class="map" role="application" aria-label="속초·고성·양양 여행지 지도"></div>
+          <div id="map-fallback" class="map-fallback" hidden>
+            <strong>지도를 불러오지 못했어요.</strong>
+            <p>왼쪽 목록에서 장소를 선택하거나 길찾기 버튼을 이용할 수 있어요.</p>
+          </div>
+          <p class="map-caption">지도 핀은 장소 확인을 위한 중심점입니다. 정확한 운영 위치와 주차·입장 조건은 출발 전 공식 페이지에서 다시 확인하세요.</p>
+        </div>
+
+        <aside id="detail-panel" class="detail-panel" aria-labelledby="detail-title">
+          <div class="detail-empty">
+            <span class="empty-kicker">PLACE NOTE</span>
+            <h2>지도의 핀을 눌러<br />여행지를 골라보세요.</h2>
+            <p>아이들과 가기 좋은 정도, 강아지 동반 메모, 2026년 비용 확인 상태를 함께 보여드려요.</p>
+            <div class="empty-line"><span></span><span></span><span></span></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div><strong>우리의 속초 여름</strong><span>가족끼리 쓰는 여행 메모</span></div>
+      <p>2026 가격은 <strong>확인됨 · 참고 · 현장 확인</strong>으로 구분했어요.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
